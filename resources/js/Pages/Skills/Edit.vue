@@ -1,34 +1,16 @@
 <template>
+     <Head title="Edit Skill" > </Head>
 
         <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Add New Project</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Add New Skill</h2>
         </template>
 
-          <div class="py-12">
+        <div class="py-12">
             <div class="max-w-lg mx-auto sm:px-6 lg:px-8 bg-white">
 
             <form class="p-4" @submit.prevent="submit">
-                 <InputLabel for="skill_id" value="Skill" />
-                <div>
-                    <select v-model="form.skill_id" id="skill_id" name="skill_id"
-                    class="mt-1
-                    block
-                    w-full
-                    pl-3
-                    pr-10
-                    py-2
-                    text-base
-                    border-gray-300
-                    focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
-                    sm:text-sm
-                    rounded-md
-                    "
-                     >
-                        <option v-for="skill in skills" :key="skill.id" :value="skill.id">{{skill.name}}</option>
-                    </select>
-                </div>
-            <div class="mt-4">
+            <div>
                 <InputLabel for="name" value="Name" />
 
                 <TextInput
@@ -38,24 +20,10 @@
                     v-model="form.name"
 
                     autofocus
-                    autocomplete="projectname"
+                    autocomplete="skillname"
                 />
 
                 <InputError class="mt-2" :message="form.errors.name" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="project_url" value="Project URL" />
-
-                <TextInput
-                    id="project_url"
-                    type="project_url"
-                    class="mt-1 block w-full"
-                    v-model="form.project_url"
-                    autocomplete="projecturl"
-                />
-
-                <InputError class="mt-2" :message="form.errors.project_url" />
             </div>
 
             <div class="mt-4">
@@ -85,6 +53,7 @@
         </form>
            </div>
             </div>
+
     </AuthenticatedLayout>
 </template>
 
@@ -96,20 +65,23 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+// import {Inertia} from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 
-defineProps({
- skills: Array
+const props=defineProps({
+    skill:Object
 });
-
 const form = useForm({
-    name: '',
+    name: props.skill?.name,
     image: null,
-    skill_id:"",
-    project_url:""
 
 });
 
 const submit = () => {
-    form.post(route('projects.store'));
+    router.post(`/skills/${props.skill.id}`,{
+    _method:"put",
+    name:form.name,
+    image:form.image
+   })
 };
 </script>

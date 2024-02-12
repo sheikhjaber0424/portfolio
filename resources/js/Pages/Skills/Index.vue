@@ -1,5 +1,6 @@
 <template>
-     <Head title="Skills Index" />
+     <Head title="Skills Index" > </Head>
+
 
         <AuthenticatedLayout>
         <template #header>
@@ -47,7 +48,9 @@
                 </td>
 
                 <td class="px-6 py-4 dark:text-black">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <!-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" >Edit</a> -->
+                    <Link :href="route('skills.edit',skill.id)" class="font-medium text-blue-500 hover:text-blue-700 mr-2">Edit</Link>
+                    <Link :href="route('skills.destroy',skill.id)" method="delete" class="font-medium text-red-500 hover:text-red-700 mr-2">Delete</Link>
                 </td>
             </tr>
         </tbody>

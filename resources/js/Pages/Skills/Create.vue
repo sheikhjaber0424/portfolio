@@ -1,5 +1,5 @@
 <template>
-     <Head title="New Skill" />
+  <Head title="New Skill"></Head>
 
         <AuthenticatedLayout>
         <template #header>
@@ -37,6 +37,7 @@
 
                 />
 
+
                 <InputError class="mt-2" :message="form.errors.image" />
             </div>
 
@@ -57,7 +58,7 @@
     </AuthenticatedLayout>
 </template>
 
-<<script setup>
+<script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head,Link, useForm } from '@inertiajs/vue3';
 
